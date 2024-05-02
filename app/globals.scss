@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 17% 98%;
+    --foreground: 210 5% 38%;
+    --muted: 210 12% 90%;
+    --muted-foreground: 210 12% 30%;
+    --popover: 210 17% 95%;
+    --popover-foreground: 210 5% 28%;
+    --card: 210 17% 96%;
+    --card-foreground: 210 5% 33%;
+    --border: 210 7% 93%;
+    --input: 210 7% 90%;
+    --primary: 35 100% 60%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 35 30% 25%;
+    --secondary-foreground: 35 30% 85%;
+    --accent: 210 17% 83%;
+    --accent-foreground: 210 17% 23%;
+    --destructive: 5 83% 33%;
+    --destructive-foreground: 5 83% 93%;
+    --ring: 35 100% 60%;
+    
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 285 5% 17%;
+    --foreground: 60 25% 98%;
+    --muted: 285 12% 21%;
+    --muted-foreground: 285 12% 71%;
+    --popover: 285 5% 14%;
+    --popover-foreground: 0 0% 100%;
+    --card: 285 5% 15%;
+    --card-foreground: 0 0% 100%;
+    --border: 0 0% 22%;
+    --input: 0 0% 25%;
+    --primary: 45 100% 70%;
+    --primary-foreground: 45 100% 10%;
+    --secondary: 45 30% 25%;
+    --secondary-foreground: 45 30% 85%;
+    --accent: 285 5% 32%;
+    --accent-foreground: 285 5% 92%;
+    --destructive: 10 97% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --ring: 45 100% 70%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply text-transparent bg-clip-text;
+  }
+}
+
+.citation {
+  position: relative;
+  display: inline-block;
+  padding: 4px;
+  border-radius: 0.5rem;
+  color: var(--foreground);
+  font-style: italic;
+  --gap: -16px;
+}
+
+.citation::before {
+  content: "“";
+  font-size: 3rem;
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  line-height: 1;
+  color: hsl(var(--primary));
+}
+
+.citation::after {
+  content: "”";
+  font-size: 3rem;
+  position: absolute;
+  bottom: -16px;
+  right: -4px;
+  line-height: 1;
+  color: hsl(var(--primary));
+}
+
+.citation strong {
+  font-weight: 700;
+  background: hsl(var(--primary) / 0.5);
+  display: inline;
+  padding: 2px;
+  margin: -2px;
+}
+
+.dot-pattern {
+  background-color: var(--dot-background);
+  opacity: 0.8;
+  background-image: radial-gradient(
+    var(--dot-color) 0.5px,
+    var(--dot-background) 0.5px
+  );
+  background-size: var(--size, 10px) var(--size, 10px);
+}
+
+.prose {
+  scroll-margin-top: 40px;
+
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    position: relative;
+    scroll-margin-top: 70px;
+
+    &:hover {
+      & .icon-link {
+        opacity: 1;
+      }
+    }
+  }
+
+  & .icon.icon-link {
+    width: 20px;
+    height: 100%;
+    display: block;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: -24px;
+
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    &::before {
+      content: "#";
+      font-size: 1.5rem;
+      color: hsl(var(--primary));
+    }
+  }
+}
