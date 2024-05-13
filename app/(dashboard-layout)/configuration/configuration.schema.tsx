@@ -1,8 +1,8 @@
-import { ConfigurationType as PrismaConfigurationType  } from "@prisma/client";
+import { ConfigurationType} from "@prisma/client";
 import { z } from "zod";
 
 export const ConfigurationSchema = z.object({
-   type: z.nativeEnum(PrismaConfigurationType),
+   type: z.nativeEnum(ConfigurationType),
    name: z.string(),
    description: z.string().optional().nullable(),
    id: z.string().optional().nullable(),

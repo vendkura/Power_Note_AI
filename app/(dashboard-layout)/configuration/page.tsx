@@ -10,7 +10,10 @@ export default async function page(){
         where:{
             userId: user.id,
         }
+
+        
     })
+
 
     console.log(configurations);
     return(
@@ -20,12 +23,14 @@ export default async function page(){
                 Edit Configuration
             </LayoutTitle>
             <LayoutDescription>
-                The configuration define the field you want to fill daily
+                The configuration define the field you want to fill daily.
+                Worker
             </LayoutDescription>
             </LayoutHeader>
             <LayoutContent>
                 <ConfigurationForm  configurations={configurations}/>
             </LayoutContent>
+            
         </Layout>
     )
 }

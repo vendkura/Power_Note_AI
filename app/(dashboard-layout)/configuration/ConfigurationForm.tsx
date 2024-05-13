@@ -1,10 +1,9 @@
 "use client";
 import { Form,FormControl,FormField,FormItem,FormLabel,FormMessage,useZodForm } from "@/components/ui/form";
-import { ConfigurationFormType } from "./configuration.schema";
+import { ConfigurationFormType, ConfigurationSchema } from "./configuration.schema";
 import { ConfigurationsSchema } from "./configuration.schema";
 import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
-import { Trash2 } from "lucide-react";
 import { enqueueDialog } from "@/features/dialogs-provider/DialogProvider";
 import { Label } from "@radix-ui/react-label";
 import { config } from "process";
@@ -19,7 +18,9 @@ import {
   } from "@/components/ui/select"
 import { ConfigurationType } from "@prisma/client";
 import { Textarea } from "@/components/ui/textarea";
-import { Plus } from "lucide-react";
+// import { Plus } from "lucide-react";
+import { Trash2, Plus } from "lucide-react";
+
 import { SubmitButton } from "@/features/form/SubmitButton";
 
 export type ConfigurationFormProps = {
@@ -27,6 +28,7 @@ export type ConfigurationFormProps = {
 }
 
 export const ConfigurationForm = (props: ConfigurationFormProps) => {
+    console.log('ConfigurationForm is rendering');
     const form = useZodForm({
         schema: z.object({
             configurations: ConfigurationsSchema,
@@ -36,14 +38,21 @@ export const ConfigurationForm = (props: ConfigurationFormProps) => {
         } 
     });
 
+    // const form = useZodForm({
+    //     schema: ConfigurationsSchema,
+    //     defaultValues: props.configurations
+    // })
+
     const handleSubmit = useMutation({
         mutationFn: async(values: ConfigurationFormType[])=>{}
     })
     return <Form form={form}
         className="flex flex-col gap-8"
-    onSubmit={async(v)=>handleSubmit.mutateAsync(v.configurations)}>
+        onSubmit={async(v)=>handleSubmit.mutateAsync(v.configurations)}>
+
         <div className="flex flex-col gap-6">
             {form.watch("configurations").map((config, index) => (
+
                 <fieldset key={index}
                 className="relative flex flex-col gap-4 p-4 border boder-border rounded-lg shadow-md">
 
@@ -116,7 +125,7 @@ export const ConfigurationForm = (props: ConfigurationFormProps) => {
                             )}
                         />
 
-<FormField
+    <FormField
                             control={form.control}
                             name={`configurations.${index}.description`}
                             render={({ field }) => (
